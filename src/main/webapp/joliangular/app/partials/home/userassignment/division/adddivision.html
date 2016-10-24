@@ -1,0 +1,157 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="modal" id="adddivision" tabindex="-1" role="dialog" aria-labelledby="largeModalHead" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="panel panel-default">
+                        <div class="panel-heading ">
+                            <h3 class="panel-title updateTitle text-center"><strong>Division Assignment</strong></h3>
+                            <ul class="panel-controls">
+                                <li><button type="button" id="close-modal" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body panel-body-search">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span class="fa fa-search"></span></span>
+                                                            <input type="text" class="form-control" placeholder="Search..." ng-model="searchUnassignedList">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- LOGIN WIDGET -->
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <h3>Unassigned Division</h3>
+                                                        <div class="">
+                                                            <div class="">
+                                                                <div class="form-control hide-scroll selectl" ng-model="unAssignedCheck" ng-change="checkToggleUnAssigned(unAssignedCheck)">
+
+                                                                    <div class="selectallcheck" checklist-model="unAssignedCheck" checklist-value="unAssignedCheck" ng-change="checkToggleUnAssigned(unAssignedCheck)">
+                                                                        <input type="checkbox" ng-click="checkToggleUnAssigned(unAssignedCheck)" class="selectallcheckboxunassigndivision">                                                                        Select All
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <div class="selectlist">
+                                                                <span class="form-control" style="overflow:auto">
+                                                <div ng-repeat="division in unAssignedDivision | filter : searchunassignedlist">
+      <input type="checkbox"  checklist-model="unassignedSelectedDivisionList.divisions" checklist-value="division"> {{division.organizationName}}
+    </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body panel-body-search">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-search"></span></span>
+                                                        <input type="text" class="form-control" placeholder="Search..." ng-model="searchAssignedList">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- LOGIN WIDGET -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <h3>Assigned Division</h3>
+                                                    <div class="">
+                                                        <div class="">
+                                                            <div class="form-control hide-scroll selectl" ng-model="AssignedCheck" ng-change="checkToggleAssigned(AssignedCheck)">
+
+                                                                <div class="selectallcheck" checklist-model="AssignedCheck" checklist-value="AssignedCheck" ng-change="checkToggleAssigned(AssignedCheck)">
+                                                                    <input type="checkbox" ng-click="checkToggleAssigned(AssignedCheck)" class="selectallcheckboxassigndivision">                                                                    Select All
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="">
+                                                        <div class="selectlist">
+                                                            <span class="form-control" style="overflow:auto">
+                                                <div ng-repeat="division in assignedDivision | filter : searchAassignedlist">
+      <input type="checkbox"  checklist-model="assignedSelectedDivisionList.divisions" checklist-value="division"> {{division.organizationName}}
+    </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-offset-4 col-sm-2 text-center">
+                                        <span title="Click to assign role"><i class="fa fa-chevron-right fa-2x cursor-point" ng-click="moveToAssigned(unassignedSelectedDivisionList.divisions)" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="col-sm-2 text-center">
+                                        <span title="Click to unassign role"><i class="fa fa-chevron-left fa-2x cursor-point" ng-click="moveToUnAssigned(assignedSelectedDivisionList.divisions)" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading ui-draggable-handle">
+                                <h3 class="panel-title"><span class="fa fa-book"></span> Notes</h3>
+                                <div class="pull-right">
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="messages messages-img">
+                                    <div class="item in item-visible">
+                                        <textarea placeholder="Write your notes here" ng-model="user.notes" name="notes" id="notes" class="form-control new-user-notes"
+                                            rows="7"></textarea>
+                                    </div>
+                                    <div class="item in item-visible notes-scroll">
+                                        <div ng-repeat="note in notes">
+                                            <div class="form-control notes-textarea" style="margin-bottom: 15px;">
+                                                <div class="row" id="inputNote" style="resize: none;" readonly>
+                                                    <span>{{note.notes}}</span>
+                                                </div>
+                                                <div class="row" id="inputNote" style="resize: none;" readonly>
+                                                    <span class="pull-right">{{note.userName}} , {{note.createdDate|date:'dd-MMM-yyyy , h:mma'}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-4 col-sm-12 text-center button-margin">
+
+                        <button type="button" class="btn btn-success mb-control" ng-click="updateDivisionAssignment()">Save</button>
+                        <input type="button" data-dismiss="modal" class="btn btn-danger" id="cancel" name="cancel" value="Cancel" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!--<div class="messages messages-img">
+                                            <div class="item in item-visible">
+                                                <textarea ng-model="notes" name="notes" id="notes" class="form-control new-user-notes"></textarea>
+                                            </div>
+                                            <!--<div class="item item-visible">
+                                                <div class="text">
+                                                    <div class="heading">
+                                                        <a href="#">Dmitry Ivaniuk</a>
+                                                        <span class="date">08:27</span>
+                                                    </div>
+                                                    Quisque ultricies turpis pulvinar lectus semper, eget fringilla purus tincidunt.
+                                                </div>
+                                            </div>
+                                        </div>-->
